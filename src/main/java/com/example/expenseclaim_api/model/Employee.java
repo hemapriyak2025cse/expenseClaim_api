@@ -1,11 +1,14 @@
 package com.example.expenseclaim_api.model;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Employee {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank(message = "Name is required")
@@ -13,28 +16,63 @@ public class Employee {
 
     @NotBlank(message = "Email is required")
     @Email(message = "Enter a valid email")
+    @Column(unique = true)
     private String email;
 
-    public Employee() {}
-    public Employee(Long id, String name, String email) {
+    @NotBlank(message = "Password is required")
+    private String password;
+
+    @NotBlank(message = "Role is required")
+    private String role;
+
+    public Employee() {
+    }
+
+    public Employee(Long id, String name, String email, String password, String role) {
         this.id = id;
-         this.name = name; 
-         this.email = email;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.role = role;
     }
-    public Long getId() { return id; }
+
+    public Long getId() {
+        return id;
+    }
+
     public void setId(Long id) {
-         this.id = id;
-         }
+        this.id = id;
+    }
+
     public String getName() {
-        return name; 
+        return name;
     }
+
     public void setName(String name) {
-        this.name = name; 
+        this.name = name;
     }
+
     public String getEmail() {
-         return email; 
-        }
-    public void setEmail(String email) { 
-        this.email = email; 
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }
